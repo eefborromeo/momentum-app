@@ -35,6 +35,10 @@ main {
   font-size: 11rem;
 }
 
+#time .abbreviation {
+  font-size: 4rem;
+}
+
 #text {
   text-align: center;
   margin-bottom: 1.5rem;

@@ -24,16 +24,18 @@ let greeting;
 
 function getTime() {
     let today = new Date();
+    let format = today.toLocaleTimeString([],{hour:'2-digit', minute:'2-digit'}).split(' ');
+    let hour = parseInt(format[0].split(':'));
     
-    if (today.getHours() < 12) {
+    if (hour < 12 && format[1] === "AM") {
         greeting = 'Good morning'
-    } else if (today.getHours() < 18) {
+    } else if (hour < 6 && format[1] === "PM") {
         greeting = 'Good afternoon'
     } else {
         greeting = 'Good evening'
     }
-    let timer = `${today.getHours()}:${today.getMinutes() < 10 ? '0'+ today.getMinutes() : today.getMinutes()}`
-    time.textContent = timer;
+    
+    time.innerHTML = `<span>${format[0]}</span><span class="abbreviation">${format[1]}</span>`;
 }
 getTime();
 setInterval(getTime, 5000)
