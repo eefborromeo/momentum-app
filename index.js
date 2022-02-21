@@ -1,5 +1,5 @@
-
 // VARIABLES
+const body = document.querySelector('body');
 const time = document.getElementById('time');
 const text = document.getElementById('text');
 const nameInput = document.querySelector('input#name');
@@ -17,6 +17,7 @@ const toDoList = document.querySelector('#todo .tooltip > ul');
 
 const quotes = [`Nothing is impossible`, `You are never too old to set another goal or to dream a new dream.`, `Believe you can and you’re halfway there.`]
 const toDoItems = ['code', 'eat', 'sleep'];
+const terms = ['https://source.unsplash.com/random/900x700/?mountain', 'https://source.unsplash.com/random/900x700/?sunset', 'https://source.unsplash.com/random/900x700/?forest']
 
 // DATE
 let greeting;
@@ -32,7 +33,7 @@ function getTime() {
         greeting = 'Good evening'
     }
     let timer = `${today.getHours()}:${today.getMinutes() < 10 ? '0'+ today.getMinutes() : today.getMinutes()}`
-   time.textContent = timer;
+    time.textContent = timer;
 }
 getTime();
 setInterval(getTime, 5000)
@@ -51,9 +52,9 @@ function updateName(event) {
 // FOCUS
 function updateFocus(event) {
     if (event.code === 'Enter') {
-       focusAnswerSpan.textContent = focusInput.value;
-       focusQuestion.classList.add('hide');
-       focusAnswer.classList.remove('hide');
+        focusAnswerSpan.textContent = focusInput.value;
+        focusQuestion.classList.add('hide');
+        focusAnswer.classList.remove('hide');
     }
 }
 
@@ -68,73 +69,77 @@ function updateFocus(event) {
     })
     select.selectedIndex = randomNumber
     quoteElement.prepend(select);
-// }
-
-function showQuoteInput(event) {
-    event.target.nextElementSibling.classList.toggle('hide')
-}
-
-function addQuote(event) {   
-    if (event.code === "Enter") {
-        quotes.push(quoteInput.value);
-        const option = document.createElement('option');
-        option.textContent = `"${quoteInput.value}"`;
-        select.appendChild(option);
-        select.selectedIndex = select.children.length - 1;
-        quoteInput.classList.add('hide');
+    // }
+    
+    function showQuoteInput(event) {
+        event.target.nextElementSibling.classList.toggle('hide')
     }
-}
-
-// showRandomQuote();
-
-// TODO 
-function toggleToDo() {
-    this.previousElementSibling.classList.toggle('show')
-}
-
-function showToDo(newItem) {
-    const li = document.createElement('li');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    li.textContent = newItem;
-    li.prepend(checkbox);
-    toDoList.appendChild(li);
-}
-
-function addToDo(event) {
-    if (event.code === 'Enter') {
-        toDoItems.push(toDoInput.value);
-        showToDo(toDoInput.value);
-        toDoInput.value = '';
+    
+    function addQuote(event) {   
+        if (event.code === "Enter") {
+            quotes.push(quoteInput.value);
+            const option = document.createElement('option');
+            option.textContent = `"${quoteInput.value}"`;
+            select.appendChild(option);
+            select.selectedIndex = select.children.length - 1;
+            quoteInput.classList.add('hide');
+        }
     }
-}
-
-function deleteToDo(event) {
-   if (event.target.checked) {
-       let itemIndex = toDoItems.indexOf(event.target.nextSibling.textContent);
-       if (itemIndex > -1) {
-           const removeBtn = document.createElement('span');
-           removeBtn.textContent = 'x';
-           toDoItems.splice(itemIndex, 1);
-           event.target.parentElement.appendChild(removeBtn);
-           event.target.parentElement.style.textDecoration = 'line-through';
-
-           removeBtn.addEventListener('click', function() {
-               this.parentElement.remove();
-           })
-       }
+    
+    // showRandomQuote();
+    
+    // TODO 
+    function toggleToDo() {
+        this.previousElementSibling.classList.toggle('show')
     }
-}
-
-toDoItems.forEach(item => {
-    showToDo(item);
-})
-
-// EVENTS
-nameInput.addEventListener('keyup', updateName);
-focusInput.addEventListener('keyup', updateFocus);
-toDoButton.addEventListener('click', toggleToDo);
-toDoInput.addEventListener('keyup', addToDo);
-toDoList.addEventListener('change', deleteToDo);
-quoteButton.addEventListener('click', showQuoteInput);
-quoteInput.addEventListener('keyup', addQuote);
+    
+    function showToDo(newItem) {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        li.textContent = newItem;
+        li.prepend(checkbox);
+        toDoList.appendChild(li);
+    }
+    
+    function addToDo(event) {
+        if (event.code === 'Enter') {
+            toDoItems.push(toDoInput.value);
+            showToDo(toDoInput.value);
+            toDoInput.value = '';
+        }
+    }
+    
+    function deleteToDo(event) {
+        if (event.target.checked) {
+            let itemIndex = toDoItems.indexOf(event.target.nextSibling.textContent);
+            if (itemIndex > -1) {
+                const removeBtn = document.createElement('span');
+                removeBtn.textContent = 'x';
+                toDoItems.splice(itemIndex, 1);
+                event.target.parentElement.appendChild(removeBtn);
+                event.target.parentElement.style.textDecoration = 'line-through';
+                
+                removeBtn.addEventListener('click', function() {
+                    this.parentElement.remove();
+                })
+            }
+        }
+    }
+    
+    toDoItems.forEach(item => {
+        showToDo(item);
+    })
+    
+    // RANDOM BACKGROUND-IMAGE
+    body.style.setProperty('--background-term', `url(${terms[Math.round(Math.random() * (quotes.length - 1))]})`);
+    
+    // EVENTS
+    nameInput.addEventListener('keyup', updateName);
+    focusInput.addEventListener('keyup', updateFocus);
+    toDoButton.addEventListener('click', toggleToDo);
+    toDoInput.addEventListener('keyup', addToDo);
+    toDoList.addEventListener('change', deleteToDo);
+    quoteButton.addEventListener('click', showQuoteInput);
+    quoteInput.addEventListener('keyup', addQuote);
+    
