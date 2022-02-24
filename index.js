@@ -40,23 +40,24 @@ function getTime() {
 getTime();
 setInterval(getTime, 5000)
 
-// NAME        
+// NAME
+function printGreeting() {
+    text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${localStorage.getItem('name')}</span>!</h1>`;
+    nameInput.value = '';
+    nameInput.classList.add('hide');
+    focus.classList.remove('hide');
+}
+
 function updateName(event) {
     if (event.code === 'Enter') {
         localStorage.setItem('name', nameInput.value);
-        text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${localStorage.getItem('name')}</span>!</h1>`;
-        nameInput.value = '';
-        nameInput.classList.add('hide');
-        focus.classList.remove('hide');
+        printGreeting();   
     }
 }
 
 const user = localStorage.getItem('name');
 if (user) {
-    text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${user}</span>!</h1>`;
-    nameInput.value = '';
-    nameInput.classList.add('hide');
-    focus.classList.remove('hide');
+    printGreeting();
 } else {
     text.innerHTML = "<h1>Hello, What's your name?</h1>";
 }
