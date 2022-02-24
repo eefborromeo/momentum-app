@@ -49,6 +49,10 @@ main {
   font-size: 3rem;
 }
 
+#update-name {
+  cursor: pointer;
+}
+
 #focus {
   text-align: center;
 }

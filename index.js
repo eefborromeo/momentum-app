@@ -40,24 +40,55 @@ function getTime() {
 getTime();
 setInterval(getTime, 5000)
 
-// NAME
-text.innerHTML = "<h1>Hello, What's your name?</h1>";
-
-function updateName(event) {
-    if (event.code === 'Enter') {
-        text.innerHTML = `<h1 class="name">${greeting}, ${nameInput.value}!</h1>`;
+// NAME        
+    function updateName(event) {
+        if (event.code === 'Enter') {
+            localStorage.setItem('name', nameInput.value);
+            text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${localStorage.getItem('name')}</span>!</h1>`;
+            nameInput.value = '';
+            nameInput.classList.add('hide');
+            focus.classList.remove('hide');
+        }
+    }
+    
+    const user = localStorage.getItem('name');
+    if (user) {
+        text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${user}</span>!</h1>`;
+        nameInput.value = '';
         nameInput.classList.add('hide');
         focus.classList.remove('hide');
+    } else {
+        text.innerHTML = "<h1>Hello, What's your name?</h1>";
     }
-}
+    
+    function showNameInput(event) {
+        if (event.target.tagName === 'SPAN') {
+            text.innerHTML = "<h1>Hello, What's your name?</h1>";
+            nameInput.classList.remove('hide');
+            focus.classList.add('hide');
+        }
+    }
+
+    
+    text.addEventListener('click', showNameInput)
+
+
 
 // FOCUS
 function updateFocus(event) {
     if (event.code === 'Enter') {
-        focusAnswerSpan.textContent = focusInput.value;
+        localStorage.setItem('focus', focusInput.value);
+        focusAnswerSpan.textContent = localStorage.getItem('focus');
         focusQuestion.classList.add('hide');
         focusAnswer.classList.remove('hide');
     }
+}
+
+const focusValue = localStorage.getItem('focus');
+if (focusValue !== null) {
+    focusAnswerSpan.textContent = localStorage.getItem('focus');
+    focusQuestion.classList.add('hide');
+    focusAnswer.classList.remove('hide');
 }
 
 // QUOTE
@@ -140,4 +171,3 @@ toDoInput.addEventListener('keyup', addToDo);
 toDoList.addEventListener('change', deleteToDo);
 quoteButton.addEventListener('click', showQuoteInput);
 quoteInput.addEventListener('keyup', addQuote);
-    
