@@ -14,6 +14,8 @@ const quoteInput = document.querySelector('.add-quote input')
 const toDoButton = document.querySelector('#todo button');
 const toDoInput = document.querySelector('#todo input');
 const toDoList = document.querySelector('#todo .tooltip > ul');
+const file = document.querySelector('input[type="file"]');
+const fileButton = document.querySelector('#file button');
 
 const quotes = [`Nothing is impossible`, `You are never too old to set another goal or to dream a new dream.`, `Believe you can and you’re halfway there.`]
 let toDoItems = [];
@@ -177,6 +179,22 @@ toDoItems.forEach(item => {
     showToDo(item);
 })
 
+
+// CUSTOM BACKGROUND IMAGE
+
+function showFileInput() {
+    this.classList.add('hide');
+    file.classList.remove('hide');
+}
+
+function handleFile() {
+    const imageFile = this.files[0];
+    let fileURL = URL.createObjectURL(imageFile);
+    body.style.backgroundImage = `url(${fileURL})`
+}
+
+
+
 // RANDOM BACKGROUND-IMAGE
 body.style.setProperty('--background-term', `url(${terms[Math.round(Math.random() * (quotes.length - 1))]})`);
 
@@ -188,3 +206,5 @@ toDoInput.addEventListener('keyup', addToDo);
 toDoList.addEventListener('change', deleteToDo);
 quoteButton.addEventListener('click', showQuoteInput);
 quoteInput.addEventListener('keyup', addQuote);
+fileButton.addEventListener('click', showFileInput)
+file.addEventListener('change', handleFile);
