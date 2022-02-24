@@ -89,6 +89,7 @@ input[type='text'] {
   background: transparent;
   color: white;
   appearance: none;
+  -webkit-appearance: none;
   text-align: center;
   font-size: 1rem;
   margin-bottom: 0.5rem;
