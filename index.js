@@ -66,6 +66,7 @@ function showNameInput(event) {
         text.innerHTML = "<h1>Hello, What's your name?</h1>";
         nameInput.classList.remove('hide');
         focus.classList.add('hide');
+        localStorage.removeItem('name');
     }
 }
 
