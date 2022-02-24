@@ -174,10 +174,12 @@ function deleteToDo(event) {
     }
 }
 
-toDoItems = JSON.parse(localStorage.getItem('todo'));
-toDoItems.forEach(item => {
-    showToDo(item);
-})
+if (localStorage.getItem('todo')) {
+    toDoItems = JSON.parse(localStorage.getItem('todo'));
+    toDoItems.forEach(item => {
+        showToDo(item);
+    })
+}
 
 
 // CUSTOM BACKGROUND IMAGE

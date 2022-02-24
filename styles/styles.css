@@ -195,4 +195,5 @@ input[type='text'] {
   background: none;
   outline: none;
   color: white;
+  cursor: pointer;
 }
