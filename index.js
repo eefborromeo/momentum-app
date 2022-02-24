@@ -160,7 +160,6 @@ function deleteToDo(event) {
 }
 
 toDoItems = JSON.parse(localStorage.getItem('todo'));
-console.log(toDoItems)
 toDoItems.forEach(item => {
     showToDo(item);
 })
