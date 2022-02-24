@@ -41,36 +41,36 @@ getTime();
 setInterval(getTime, 5000)
 
 // NAME        
-    function updateName(event) {
-        if (event.code === 'Enter') {
-            localStorage.setItem('name', nameInput.value);
-            text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${localStorage.getItem('name')}</span>!</h1>`;
-            nameInput.value = '';
-            nameInput.classList.add('hide');
-            focus.classList.remove('hide');
-        }
-    }
-    
-    const user = localStorage.getItem('name');
-    if (user) {
-        text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${user}</span>!</h1>`;
+function updateName(event) {
+    if (event.code === 'Enter') {
+        localStorage.setItem('name', nameInput.value);
+        text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${localStorage.getItem('name')}</span>!</h1>`;
         nameInput.value = '';
         nameInput.classList.add('hide');
         focus.classList.remove('hide');
-    } else {
-        text.innerHTML = "<h1>Hello, What's your name?</h1>";
     }
-    
-    function showNameInput(event) {
-        if (event.target.tagName === 'SPAN') {
-            text.innerHTML = "<h1>Hello, What's your name?</h1>";
-            nameInput.classList.remove('hide');
-            focus.classList.add('hide');
-        }
-    }
+}
 
-    
-    text.addEventListener('click', showNameInput)
+const user = localStorage.getItem('name');
+if (user) {
+    text.innerHTML = `<h1 class="name">${greeting}, <span id="update-name">${user}</span>!</h1>`;
+    nameInput.value = '';
+    nameInput.classList.add('hide');
+    focus.classList.remove('hide');
+} else {
+    text.innerHTML = "<h1>Hello, What's your name?</h1>";
+}
+
+function showNameInput(event) {
+    if (event.target.tagName === 'SPAN') {
+        text.innerHTML = "<h1>Hello, What's your name?</h1>";
+        nameInput.classList.remove('hide');
+        focus.classList.add('hide');
+    }
+}
+
+
+text.addEventListener('click', showNameInput)
 
 
 
