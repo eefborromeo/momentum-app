@@ -132,7 +132,6 @@ input[type='text'] {
 
 #todo .tooltip {
   min-width: 250px;
-  /* min-height: 300px; */
   background-color: #000;
   position: absolute;
   bottom: 4rem;
@@ -155,8 +154,6 @@ input[type='text'] {
 }
 
 #todo .tooltip ul {
-  /* position: absolute;
-  bottom: 0; */
   list-style-type: none;
 }
 
