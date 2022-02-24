@@ -49,7 +49,7 @@ function printGreeting() {
 }
 
 function updateName(event) {
-    if (event.code === 'Enter') {
+    if (nameInput.value !== '' && event.code === 'Enter') {
         localStorage.setItem('name', nameInput.value);
         printGreeting();   
     }
@@ -78,11 +78,12 @@ text.addEventListener('click', showNameInput)
 
 // FOCUS
 function updateFocus(event) {
-    if (event.code === 'Enter') {
+    if (focusInput.value !== '' && event.code === 'Enter') {
         localStorage.setItem('focus', focusInput.value);
         focusAnswerSpan.textContent = localStorage.getItem('focus');
         focusQuestion.classList.add('hide');
         focusAnswer.classList.remove('hide');
+        focusInput.value = '';
     }
 }
 
@@ -92,6 +93,17 @@ if (focusValue !== null) {
     focusQuestion.classList.add('hide');
     focusAnswer.classList.remove('hide');
 }
+
+function showFocus(event) {
+    if (event.target.tagName === 'SPAN') {
+        focusQuestion.classList.remove('hide');
+        focusAnswer.classList.add('hide');
+        localStorage.removeItem('focus');
+    }
+}
+
+
+focusAnswer.addEventListener('click', showFocus)
 
 // QUOTE
 let randomNumber = Math.round(Math.random() * (quotes.length - 1));

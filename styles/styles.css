@@ -57,6 +57,10 @@ main {
   text-align: center;
 }
 
+#focus .answer span {
+  cursor: pointer;
+}
+
 input[type='text'] {
   border: none;
   outline: none;
