@@ -16,7 +16,7 @@ const toDoInput = document.querySelector('#todo input');
 const toDoList = document.querySelector('#todo .tooltip > ul');
 
 const quotes = [`Nothing is impossible`, `You are never too old to set another goal or to dream a new dream.`, `Believe you can and you’re halfway there.`]
-const toDoItems = ['code', 'eat', 'sleep'];
+let toDoItems = [];
 const terms = ['https://source.unsplash.com/random/900x700/?mountain', 'https://source.unsplash.com/random/900x700/?sunset', 'https://source.unsplash.com/random/900x700/?forest']
 
 // DATE
@@ -136,6 +136,7 @@ function addToDo(event) {
         toDoItems.push(toDoInput.value);
         showToDo(toDoInput.value);
         toDoInput.value = '';
+        localStorage.setItem('todo', JSON.stringify(toDoItems))
     }
 }
 
@@ -151,11 +152,14 @@ function deleteToDo(event) {
             
             removeBtn.addEventListener('click', function() {
                 this.parentElement.remove();
+                localStorage.setItem('todo', JSON.stringify(toDoItems))
             })
         }
     }
 }
 
+toDoItems = JSON.parse(localStorage.getItem('todo'));
+console.log(toDoItems)
 toDoItems.forEach(item => {
     showToDo(item);
 })
