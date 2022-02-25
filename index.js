@@ -190,15 +190,14 @@ function showFileInput() {
 }
 
 function handleFile() {
-    // const imageFile = this.files[0];
-    // let fileURL = URL.createObjectURL(imageFile);
-    // body.style.backgroundImage = `url(${fileURL})`
-
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
         localStorage.setItem('bg-image', reader.result);
         body.style.backgroundImage = `url(${localStorage.getItem('bg-image')})`
+        file.value = '';
+        file.classList.add('hide');
+        fileButton.classList.remove('hide');
     })
 
     reader.readAsDataURL(this.files[0]);
