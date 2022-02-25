@@ -190,9 +190,21 @@ function showFileInput() {
 }
 
 function handleFile() {
-    const imageFile = this.files[0];
-    let fileURL = URL.createObjectURL(imageFile);
-    body.style.backgroundImage = `url(${fileURL})`
+    // const imageFile = this.files[0];
+    // let fileURL = URL.createObjectURL(imageFile);
+    // body.style.backgroundImage = `url(${fileURL})`
+
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+        localStorage.setItem('bg-image', reader.result);
+    })
+
+    reader.readAsDataURL(this.files[0]);
+}
+
+if (localStorage.getItem('bg-image')) {
+    body.style.backgroundImage = `url(${localStorage.getItem('bg-image')})`
 }
 
 
