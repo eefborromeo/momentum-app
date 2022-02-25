@@ -198,6 +198,7 @@ function handleFile() {
 
     reader.addEventListener('load', () => {
         localStorage.setItem('bg-image', reader.result);
+        body.style.backgroundImage = `url(${localStorage.getItem('bg-image')})`
     })
 
     reader.readAsDataURL(this.files[0]);
